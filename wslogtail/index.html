@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+    var con = new WebSocket("ws://localhost:8756/testreviewapps.test.clarisys.lan");
+    con.onerror = function(error) {
+        console.log("err", error);
+    };
+    con.onmessage = function(e) {
+        console.log("received", JSON.parse(e.data)["line"]);
+    };
+    </script>
+  </head>
+  <body>
+    <p>Open the console, bitch</p>
+  </body>
+</html>
