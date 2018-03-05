@@ -42,7 +42,9 @@ async def wstail(
         logpath = None
     if logpath and logpath.exists():
         with logpath.open(mode="rb") as f:
-            f.seek(-READBACK_LEN, 2)
+            f.seek(0, 2)
+            maxreadback_len = f.tell()
+            f.seek(-min(READBACK_LEN, maxreadback_len), 2)
             data = f.read().decode("utf-8")
             for l in data.splitlines():
                 await websocket.send(
